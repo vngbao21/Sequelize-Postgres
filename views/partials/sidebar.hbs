@@ -1,32 +1,35 @@
 <div class="col-lg-4 col-md-5">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="index.html">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
-                            </ul>
-                        </div>
+    <div class="blog__sidebar">
+        <div class="blog__sidebar__search">
+            <form id="searchForm">
+                <input id="searchInput" type="text" placeholder="Search...">
+                <button type="submit"><span class="icon_search"></span></button>
+            </form>
+        </div>
+        <div class="blog__sidebar__item">
+            <h4>Categories</h4>
+            <ul>
+                {{#each categories}}
+                <li><a href="/blogs?category={{id}}">{{name}} ({{Blogs.length}})</a></li>
+                {{/each}}
+            </ul>
+        </div>
 
-                        <div class="blog__sidebar__item">
-                            <h4>Search By Tags</h4>
-                            <div class="blog__sidebar__item__tags">
-                                <a href="#">Apple</a>
-                                <a href="#">Beauty</a>
-                                <a href="#">Vegetables</a>
-                                <a href="#">Fruit</a>
-                                <a href="#">Healthy Food</a>
-                                <a href="#">Lifestyle</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="blog__sidebar__item">
+            <h4>Search By Tags</h4>
+            <div class="blog__sidebar__item__tags">
+                {{#each tags}}
+                <a href="/blogs?tag={{id}}">{{name}}</a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var query = document.getElementById('searchInput').value;
+        window.location.href = '/blogs?keyword=' + encodeURIComponent(query);
+    });
+</script>

@@ -4,6 +4,4 @@ const controller = require("../controllers/blogController");
 
 router.get("/", controller.showList);
 router.get("/:id", controller.showDetails);
-
-module.export = router;
-
+module.exports = router;
